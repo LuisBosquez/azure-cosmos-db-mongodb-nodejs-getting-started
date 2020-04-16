@@ -3,13 +3,28 @@ const assert = require('assert');
 const config = require('./config');
 
 // Connection URL
-const url = 'mongodb://localhost:27017';
+const url = 'mongodb://' + config.username + ':' + config.key + '@' + config.endpoint + ':10255';
 
 // Database Name
-const dbName = 'myproject';
+const dbName = config.databaseId;
 
 // Create a new MongoClient
-const client = new MongoClient(url);
+const client = new MongoClient(url, 
+{ 
+  tls: true,
+  useUnifiedTopology: true
+});
+
+// Insert a document with an auto-generated GUID
+function insertDocument(db, coll, document, callback)
+{
+  coll.insertOne(document, function(err, result){
+    assert.equal(err, null);
+    console.log("Inserted some document");
+  })
+
+  callback();
+}
 
 // Use connect method to connect to the Server
 client.connect(function(err) {
@@ -17,8 +32,8 @@ client.connect(function(err) {
   console.log("Connected successfully to server");
 
   const db = client.db(dbName);
+  const coll = db.collection(config.containerId);
 
-  client.close();
+  insertDocument(db, coll, {}, client.close);
+
 });
-
-
