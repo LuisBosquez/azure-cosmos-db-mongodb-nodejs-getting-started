@@ -1,0 +1,29 @@
+{
+  "name": "azure-cosmos-db-mongodb-nodejs-getting-started",
+  "version": "1.0.0",
+  "description": "A simple sample to connect to Azure Cosmos DBs API for MongoDB",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LuisBosquez/azure-cosmos-db-mongodb-nodejs-getting-started.git"
+  },
+  "keywords": [
+    "node",
+    "mongodb",
+    "cosmosdb",
+    "cosmos",
+    "azure"
+  ],
+  "author": "LuisBosquez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LuisBosquez/azure-cosmos-db-mongodb-nodejs-getting-started/issues"
+  },
+  "homepage": "https://github.com/LuisBosquez/azure-cosmos-db-mongodb-nodejs-getting-started#readme",
+  "dependencies": {
+    "mongodb": "^3.5.5"
+  }
+}
