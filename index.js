@@ -15,25 +15,27 @@ const client = new MongoClient(url,
   useUnifiedTopology: true
 });
 
-// Insert a document with an auto-generated GUID
-function insertDocument(db, coll, document, callback)
-{
-  coll.insertOne(document, function(err, result){
+const insertDocuments = function(db, collection, callback) {
+  // Insert some documents
+  collection.insertMany([
+    {source: "Linux VM, Ubuntu 18.04"}
+   ], function(err, result) {
     assert.equal(err, null);
-    console.log("Inserted some document");
-  })
-
-  callback();
+    console.log("Inserted document");
+    callback(result);
+  });
 }
 
 // Use connect method to connect to the Server
 client.connect(function(err) {
   assert.equal(null, err);
   console.log("Connected successfully to server");
-
+  
   const db = client.db(dbName);
   const coll = db.collection(config.containerId);
 
-  insertDocument(db, coll, {}, client.close);
+  insertDocuments(db, coll, function(){
+    client.close();
+  });
 
 });
